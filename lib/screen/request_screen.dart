@@ -49,14 +49,14 @@ class _RequestScreenState extends State<RequestScreen> {
           token! +
           '?base64_encoded=false&fields=stdout,stderr,status_id,language_id';
       var new_url = Uri.parse(new_urL);
-      // while (true) {
+      await Future.delayed(Duration(seconds: 5));
       var getResponse = await http.get(
         new_url,
         headers: <String, String>{
           "content-type": "application/json",
         },
       );
-      await Future.delayed(Duration(seconds: 5));
+      
       var compileCode = jsonDecode(getResponse.body) as Map<String, dynamic>;
       print(compileCode);
       if (compileCode['status_id'] == 11) {
